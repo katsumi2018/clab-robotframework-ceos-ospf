@@ -1,0 +1,30 @@
+name: ceos-rf-ospf
+
+topology:
+  nodes:
+    ceos1:
+      kind: arista_ceos
+      image: ceos:4.35.0.1F
+      startup-config: configs-ceos-ospf/ceos1.cfg
+
+    ceos2:
+      kind: arista_ceos
+      image: ceos:4.35.0.1F
+      startup-config: configs-ceos-ospf/ceos2.cfg
+
+    rf1:
+      kind: linux
+      image: robotframework:latest
+      ports:
+        - "8080:8080"
+      binds:
+        - "./robot-tests:/opt/robot/tests"
+  # links:
+  #   - endpoints:
+  #       - "ceos1:eth1"
+  #       - "ceos2:eth1"
+  links:
+    - endpoints: ["ceos1:eth1", "ceos2:eth1"]
+mgmt:
+  network: ceos-rf-mgmt
+  ipv4-subnet: 172.20.21.0/24
