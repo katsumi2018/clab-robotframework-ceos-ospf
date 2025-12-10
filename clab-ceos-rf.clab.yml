@@ -19,10 +19,6 @@ topology:
         - "8080:8080"
       binds:
         - "./robot-tests:/opt/robot/tests"
-  # links:
-  #   - endpoints:
-  #       - "ceos1:eth1"
-  #       - "ceos2:eth1"
   links:
     - endpoints: ["ceos1:eth1", "ceos2:eth1"]
 mgmt:
